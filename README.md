@@ -4,6 +4,8 @@
 
 I created an interactive graph using D3 to visualize health risk indicators relative the demographics of Americans.
 
+Deployed >  https://mcglash.github.io/D3-Challenge/
+
 The data set used based on 2014 ACS 1-year estimates: [https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml](https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml). The current data set incldes data on rates of income, obesity, poverty, etc. by state. MOE stands for "margin of error."
 
 
