@@ -1,63 +1,44 @@
-//setup selection variables, holder variables and set default
+//setup selection variables and holder variables
 var xSelection = "poverty";
 var ySelection = "smokes";
 
-var xAxisLabel = "";
-var yAxisLabel = "";
-
-var xAxis ="";
-var yAxis ="";
-
-var width ="";
-var height ="";
 var circlePlot ="";
 var circleLabels ="";
 
-var povertyLabel ="";
-var ageLabel ="";
-var incomeLabel ="";
+var xAxis ="";
+var yAxis = "";
 
-var smokingLabel ="";
-var obesityLabel ="";
-var healthLabel ="";
-
-function display(){
-
+//initial setup
   // select chart element
-  var Area = d3.select("#scatter").select("svg");
-
-  // clear chart if not empty
-  if (!Area.empty()) {
-    Area.remove();
-  };
+var Area = d3.select("#scatter").select("svg");
 
   //setup element to hold chart
-  svgWidth = window.innerWidth;
-  svgHeight = window.innerHeight;
+var svgWidth = window.innerWidth;
+var svgHeight = window.innerHeight;
 
-  margin = {
+var margin = {
       top: 20,
       right: 40,
       bottom: 250,
       left: 250};
 
-  width = svgWidth - margin.left - margin.right;
-  height = svgHeight - margin.top - margin.bottom;
+var width = svgWidth - margin.left - margin.right;
+var height = svgHeight - margin.top - margin.bottom;
 
-  var svg = d3.select("#scatter")
+var svg = d3.select("#scatter")
                 .append("svg")
                 .attr("width", svgWidth)
                 .attr("height", svgHeight);
 
   // Append group element > margins for within svg element
-  chartGroup = svg.append("g")
+var chartGroup = svg.append("g")
                   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
   // setup x-axis labels
-  xAxisLabel = chartGroup.append("g")
+var xAxisLabel = chartGroup.append("g")
       .attr("transform", `translate(${width / 2}, ${height + 60})`);
 
-  povertyLabel = xAxisLabel.append("text")
+var povertyLabel = xAxisLabel.append("text")
       .attr("x", 0)
       .attr("y", 20)
       .attr("value", "poverty") 
@@ -65,7 +46,7 @@ function display(){
       .text("In Poverty (%)")
       .classed("aText", true);
 
-  ageLabel = xAxisLabel.append("text")
+var ageLabel = xAxisLabel.append("text")
       .attr("x", 0)
       .attr("y", 65)
       .attr("value", "age") 
@@ -73,7 +54,7 @@ function display(){
       .text("Median Age")
       .classed("aText", true);
     
-  incomeLabel = xAxisLabel.append("text")
+var incomeLabel = xAxisLabel.append("text")
       .attr("x", 0)
       .attr("y", 110)
       .attr("value", "income") 
@@ -82,10 +63,10 @@ function display(){
       .classed("aText", true);
     
   // setup y-axis labels
-  yAxisLabel = chartGroup.append("g")
+var yAxisLabel = chartGroup.append("g")
             .attr("transform", "rotate(-90)");
 
-  smokingLabel = yAxisLabel.append("text")
+var smokingLabel = yAxisLabel.append("text")
       .attr("x", -(height-margin.top)/2)
       .attr("y", -70)
       .attr("value", "smokes") 
@@ -93,7 +74,7 @@ function display(){
       .text("Smokes (%)")
       .classed("aText", true);
 
-  obesityLabel = yAxisLabel.append("text")
+var obesityLabel = yAxisLabel.append("text")
       .attr("x", - (height-margin.top)/2)
       .attr("y", -115)
       .attr("value", "obesity") 
@@ -101,7 +82,7 @@ function display(){
       .text("Obese (%)")
       .classed("aText", true);
 
-  healthLabel = yAxisLabel.append("text")
+var healthLabel = yAxisLabel.append("text")
       .attr("x", -(height-margin.top)/2)
       .attr("y", -160)
       .attr("value", "healthcare") 
@@ -109,9 +90,8 @@ function display(){
       .text("Lacks Healthcare Insurance (%)")
       .classed("aText", true);
 
-  //call chart function
-  chart();
-};
+//call chart function
+chart();
 
 //create chart function
 function chart(){
@@ -164,8 +144,6 @@ function chart(){
       .attr("r", 30)
       .attr("fill", "blue")
       .attr("opacity", ".5");
-
-      console.log(circlePlot)
     
     circleLabels = chartGroup.append("g").selectAll("text")
       .data(data)
@@ -195,63 +173,64 @@ function chart(){
       toolTip.show(d, this);
     })
   // Create "mouseout" event listener to hide tooltip
-    .on("mouseout", function(d) {
-      toolTip.hide(d);
-    });
+    .on("mouseout", function() {
+      d3.select(".d3-tip")
+      .transition()
+        .delay(900)
+        .duration(600)
+        .style("opacity",0)
+        .style('pointer-events', 'none')
+      });
   });
 };
 
-// call function when opening browser
-display();
-
-// function used for updating xAxis var upon click on axis label
+// function used for updating xAxis based upon selection of label
 function chartUpdatexAxis() {
 
-    // Retrieve data from the CSV file
-    d3.csv("assets/data/data.csv").then(function(data, err) {
-      if (err) throw err;
-  
-      // format the data
-      data.forEach(d => {
-        d.healthcare= +d.healthcare;
-        d.poverty = +d.poverty;
-        d.smokes = +d.smokes;
-        d.age = +d.age;
-        d.obesity = +d.obesity;
-        d.income = +d.income;
-      });
+  // Retrieve data from the CSV file
+  d3.csv("assets/data/data.csv").then(function(data, err) {
+    if (err) throw err;
 
-      // update scaling functions for axes
-      var xScale = d3.scaleLinear()
-          .domain([d3.min(data, d => d[xSelection])*0.95, d3.max(data, d => d[xSelection])*1.05])
-          .range([0, width]);
+    // format the data
+    data.forEach(d => {
+      d.healthcare= +d.healthcare;
+      d.poverty = +d.poverty;
+      d.smokes = +d.smokes;
+      d.age = +d.age;
+      d.obesity = +d.obesity;
+      d.income = +d.income;
+    });
 
-      var bottomAxis = d3.axisBottom(xScale);
+    // update scaling functions for axes
+    var xScale = d3.scaleLinear()
+        .domain([d3.min(data, d => d[xSelection])*0.95, d3.max(data, d => d[xSelection])*1.05])
+        .range([0, width]);
 
-      // update x-axis
-      xAxis.transition()
-        .duration(1000)
-        .attr("transform", `translate(0, ${height})`)
-        .call(bottomAxis);
+    var bottomAxis = d3.axisBottom(xScale);
 
-      //update scatterplot
-      circlePlot.transition()
-        .duration(1000)
-        .attr("cx", d => xScale(d[xSelection]));
+    // update x-axis
+    xAxis.transition()
+      .duration(1000)
+      .attr("transform", `translate(0, ${height})`)
+      .call(bottomAxis);
 
-      //update labels
-      circleLabels.transition()
-        .duration(1000)
-        .attr("x", d => xScale(d[xSelection]));
+    //update scatterplot
+    circlePlot.transition()
+      .duration(1000)
+      .attr("cx", d => xScale(d[xSelection]));
 
-          //Initialize tooltip
+    //update labels
+    circleLabels.transition()
+      .duration(1000)
+      .attr("x", d => xScale(d[xSelection]));
+
+    //Initialize tooltip
     var toolTip = d3.tip()
     .attr("class", "d3-tip")
     .offset([80, -60])
     .html(d =>`<strong>${d.state}<strong>
     <hr>${xSelection}: ${d[xSelection]}
     <hr>${ySelection}: ${d[ySelection]}`);
-
 
     //Create the tooltip in chartGroup.
     chartGroup.call(toolTip);
@@ -261,16 +240,21 @@ function chartUpdatexAxis() {
       toolTip.show(d, this);
     })
   // Create "mouseout" event listener to hide tooltip
-    .on("mouseout", function(d) {
-      toolTip.hide(d);
-    });
+    .on("mouseout", function() {
+      d3.select(".d3-tip")
+      .transition()
+        .delay(900)
+        .duration(600)
+        .style("opacity",0)
+        .style('pointer-events', 'none')
+      });
     
-      return circlePlot, xAxis, circleLabels;
+    return circlePlot, xAxis, tooltip, circleLabels;
 
     });
-  };
+};
 
-  // function used for updating xAxis var upon click on axis label
+  // function used for updating yAxis based upon selection of label
 function chartUpdateyAxis() {
 
   // Retrieve data from the CSV file
@@ -290,7 +274,7 @@ function chartUpdateyAxis() {
     // update scaling functions for axes
     var yScale = d3.scaleLinear()
     .domain([d3.min(data, d => d[ySelection])*0.8, d3.max(data, d => d[ySelection])*1.1])
-    .range([height, 0])
+    .range([height, 0]);
 
     var leftAxis = d3.axisLeft(yScale);
 
@@ -309,30 +293,35 @@ function chartUpdateyAxis() {
       .duration(1000)
       .attr("y", d => yScale(d[ySelection]));
 
-        //Initialize tooltip
-  var toolTip = d3.tip()
-  .attr("class", "d3-tip")
-  .offset([80, -60])
-  .html(d =>`<strong>${d.state}<strong>
-  <hr>${xSelection}: ${d[xSelection]}
-  <hr>${ySelection}: ${d[ySelection]}`);
+    //Initialize tooltip
+    var toolTip = d3.tip()
+    .attr("class", "d3-tip")
+    .offset([80, -60])
+    .html(d =>`<strong>${d.state}<strong>
+    <hr>${xSelection}: ${d[xSelection]}
+    <hr>${ySelection}: ${d[ySelection]}`);
 
 
-  //Create the tooltip in chartGroup.
-  chartGroup.call(toolTip);
+    //Create the tooltip in chartGroup.
+    chartGroup.call(toolTip);
 
-  // Create "mouseover" event listener to display tooltip
-  circleLabels.on("mouseover", function(d) {
-    toolTip.show(d, this);
-  })
-// Create "mouseout" event listener to hide tooltip
-  .on("mouseout", function(d) {
-    toolTip.hide(d);
-  });
-  
-    return circlePlot, yAxis, circleLabels;
+    // Create "mouseover" event listener to display tooltip
+    circleLabels.on("mouseover", function(d) {
+      toolTip.show(d, this);
+    })
+  // Create "mouseout" event listener to hide tooltip
+    .on("mouseout", function() {
+      d3.select(".d3-tip")
+      .transition()
+        .delay(900)
+        .duration(600)
+        .style("opacity",0)
+        .style('pointer-events', 'none')
+      });
+    
+      return circlePlot, yAxis, toolTip, circleLabels;
 
-  });
+    });
 };
 
 
@@ -442,9 +431,6 @@ yAxisLabel.selectAll("text")
 
   };
 });
-// call function to display chart based on chart size/resize
-d3.select(window).on("resize", display);
-
 
 
 
