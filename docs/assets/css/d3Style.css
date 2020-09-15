@@ -1,12 +1,12 @@
 .aText {
   font-family: sans-serif;
-  font-size: 20px;
+  font-size: 15px;
   text-anchor: middle;
 }
 
 .axes{
   font-family: sans-serif;
-  font-size: 25px;
+  font-size: 20px;
   fill: "#9b9292";
 }
 
