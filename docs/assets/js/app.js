@@ -225,7 +225,7 @@ function chartUpdatexAxis() {
       .attr("x", d => xScale(d[xSelection]));
 
     //Initialize tooltip
-    var toolTip = d3.tip()
+    toolTip = d3.tip()
     .attr("class", "d3-tip")
     .offset([80, -60])
     .html(d =>`<strong>${d.state}<strong>
@@ -239,17 +239,12 @@ function chartUpdatexAxis() {
     circleLabels.on("mouseover", function(d) {
       toolTip.show(d, this);
     })
-  // Create "mouseout" event listener to hide tooltip
-    .on("mouseout", function() {
-      d3.select(".d3-tip")
-      .transition()
-        .delay(900)
-        .duration(600)
-        .style("opacity",0)
-        .style('pointer-events', 'none')
-      });
-    
-    return circlePlot, xAxis, tooltip, circleLabels;
+    // Create "mouseout" event listener to hide tooltip
+    .on("mouseout", function(d) {
+      toolTip.hide(d);
+    });
+
+    return circlePlot, xAxis, toolTip, circleLabels;
 
     });
 };
@@ -294,7 +289,7 @@ function chartUpdateyAxis() {
       .attr("y", d => yScale(d[ySelection]));
 
     //Initialize tooltip
-    var toolTip = d3.tip()
+    toolTip = d3.tip()
     .attr("class", "d3-tip")
     .offset([80, -60])
     .html(d =>`<strong>${d.state}<strong>
@@ -309,19 +304,14 @@ function chartUpdateyAxis() {
     circleLabels.on("mouseover", function(d) {
       toolTip.show(d, this);
     })
-  // Create "mouseout" event listener to hide tooltip
-    .on("mouseout", function() {
-      d3.select(".d3-tip")
-      .transition()
-        .delay(900)
-        .duration(600)
-        .style("opacity",0)
-        .style('pointer-events', 'none')
-      });
-    
-      return circlePlot, yAxis, toolTip, circleLabels;
-
+    // Create "mouseout" event listener to hide tooltip
+    .on("mouseout", function(d) {
+      toolTip.hide(d);
     });
+    
+    return circlePlot, yAxis, toolTip, circleLabels;
+
+  });
 };
 
 
