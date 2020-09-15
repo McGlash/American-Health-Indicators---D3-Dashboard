@@ -4,6 +4,12 @@
   text-anchor: middle;
 }
 
+.axes{
+  font-family: sans-serif;
+  font-size: 25px;
+  fill: "#9b9292";
+}
+
 .active {
   font-weight: bold;
   fill: #000;
