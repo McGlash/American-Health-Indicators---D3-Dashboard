@@ -141,7 +141,7 @@ function chart(){
       .append("circle")
       .attr("cx", d => xScale(d[xSelection]))
       .attr("cy", d => yScale(d[ySelection]))
-      .attr("r", 30)
+      .attr("r", 20)
       .attr("fill", "blue")
       .attr("opacity", ".5");
     
