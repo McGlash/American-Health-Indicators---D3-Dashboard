@@ -6,9 +6,13 @@ html {
   min-height: 100%;
 }
 
+.jumbotron {
+  padding: 20px 20px 20px 20px;
+}
+
 body {
   /* Padding bottom by footer height */
-  padding-bottom: 80px;
+  padding-bottom: 25px;
 }
 
 #footer {
@@ -31,13 +35,13 @@ h1{
   color: white;
   text-align: center;
   font-weight: bold;
-  margin-bottom: 10px;
-  font-size: 20px;
+  margin-bottom: 25px;
+  font-size: 60px;
 }
 
 h4{
   color: white;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   font-size: 20px;
 }
 
@@ -46,7 +50,6 @@ h2{
   font-weight: bold;
   font-size: 30px;
 }
-
 
 .infobox{
   margin: 20px;

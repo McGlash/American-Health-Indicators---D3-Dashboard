@@ -28,6 +28,7 @@
   cursor: pointer;
 }
 
+
 /* font size dependent on radius, see app.js */
 .stateText {
   font-family: sans-serif;
@@ -64,6 +65,10 @@
   .axes{
     font-size: 15px;
   }
+
+  h1{
+    font-size: 50px;
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -72,5 +77,8 @@
   }
   .axes{
     font-size: 12px;
+  }
+  h1{
+    font-size: 50px;
   }
 }
