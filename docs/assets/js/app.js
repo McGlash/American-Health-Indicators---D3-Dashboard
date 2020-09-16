@@ -240,7 +240,7 @@ function chartUpdatexAxis() {
       toolTip.show(d, this);
     });
     // Create "mouseout" event listener to hide tooltip
-    circlePlots..on("mouseout", function(d) {
+    circlePlots.on("mouseout", function(d) {
       toolTip.hide(d);
     });
 
