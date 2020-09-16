@@ -169,11 +169,11 @@ function chart(){
     chartGroup.call(toolTip);
 
     // Create "mouseover" event listener to display tooltip
-    circleLabels.on("mouseover", function(d) {
+    circlePlots.on("mouseover", function(d) {
       toolTip.show(d, this);
-    })
+    });
   // Create "mouseout" event listener to hide tooltip
-    .on("mouseout", function() {
+    circlePlots.on("mouseout", function() {
       d3.select(".d3-tip")
       .transition()
         .delay(900)
@@ -225,7 +225,7 @@ function chartUpdatexAxis() {
       .attr("x", d => xScale(d[xSelection]));
 
     //Initialize tooltip
-    toolTip = d3.tip()
+    var toolTip = d3.tip()
     .attr("class", "d3-tip")
     .offset([80, -60])
     .html(d =>`<strong>${d.state}<strong>
@@ -236,11 +236,11 @@ function chartUpdatexAxis() {
     chartGroup.call(toolTip);
 
     // Create "mouseover" event listener to display tooltip
-    circleLabels.on("mouseover", function(d) {
+    circlePlots..on("mouseover", function(d) {
       toolTip.show(d, this);
-    })
+    });
     // Create "mouseout" event listener to hide tooltip
-    .on("mouseout", function(d) {
+    circlePlots..on("mouseout", function(d) {
       toolTip.hide(d);
     });
 
@@ -289,7 +289,7 @@ function chartUpdateyAxis() {
       .attr("y", d => yScale(d[ySelection]));
 
     //Initialize tooltip
-    toolTip = d3.tip()
+    var toolTip = d3.tip()
     .attr("class", "d3-tip")
     .offset([80, -60])
     .html(d =>`<strong>${d.state}<strong>
@@ -301,11 +301,11 @@ function chartUpdateyAxis() {
     chartGroup.call(toolTip);
 
     // Create "mouseover" event listener to display tooltip
-    circleLabels.on("mouseover", function(d) {
+    circlePlots..on("mouseover", function(d) {
       toolTip.show(d, this);
-    })
+    });
     // Create "mouseout" event listener to hide tooltip
-    .on("mouseout", function(d) {
+    circlePlots.on("mouseout", function(d) {
       toolTip.hide(d);
     });
     
