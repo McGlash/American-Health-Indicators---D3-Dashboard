@@ -301,7 +301,7 @@ function chartUpdateyAxis() {
     chartGroup.call(toolTip);
 
     // Create "mouseover" event listener to display tooltip
-    circlePlots..on("mouseover", function(d) {
+    circlePlots.on("mouseover", function(d) {
       toolTip.show(d, this);
     });
     // Create "mouseout" event listener to hide tooltip
