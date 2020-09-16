@@ -126,13 +126,15 @@ function chart(){
 
     // append axes
     xAxis = chartGroup.append("g")
-    .classed("axes", true)
     .attr("transform", `translate(0, ${height})`)
     .call(bottomAxis)
 
+    xAxis.selectAll("text").classed("axes", true);
+
     yAxis = chartGroup.append("g")
-    .classed("axes", true)
     .call(leftAxis)
+
+    yAxis.selectAll("text").classed("axes", true);
 
     // append circles and labels
     circlePlot = chartGroup.selectAll("circle")
@@ -214,6 +216,8 @@ function chartUpdatexAxis() {
       .attr("transform", `translate(0, ${height})`)
       .call(bottomAxis);
 
+    xAxis.selectAll("text").classed("axes", true);
+
     //update scatterplot
     circlePlot.transition()
       .duration(1000)
@@ -277,6 +281,8 @@ function chartUpdateyAxis() {
     yAxis.transition()
       .duration(1000)
       .call(leftAxis);
+
+    yAxis.selectAll("text").classed("axes", true);
 
     //update scatterplot
     circlePlot.transition()
