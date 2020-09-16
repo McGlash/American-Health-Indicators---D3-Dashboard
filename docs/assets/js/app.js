@@ -169,11 +169,11 @@ function chart(){
     chartGroup.call(toolTip);
 
     // Create "mouseover" event listener to display tooltip
-    circlePlots.on("mouseover", function(d) {
+    circlePlot.on("mouseover", function(d) {
       toolTip.show(d, this);
     });
   // Create "mouseout" event listener to hide tooltip
-    circlePlots.on("mouseout", function() {
+    circlePlot.on("mouseout", function() {
       d3.select(".d3-tip")
       .transition()
         .delay(900)
@@ -236,15 +236,15 @@ function chartUpdatexAxis() {
     chartGroup.call(toolTip);
 
     // Create "mouseover" event listener to display tooltip
-    circlePlots.on("mouseover", function(d) {
+    circlePlot.on("mouseover", function(d) {
       toolTip.show(d, this);
     });
     // Create "mouseout" event listener to hide tooltip
-    circlePlots.on("mouseout", function(d) {
+    circlePlot.on("mouseout", function(d) {
       toolTip.hide(d);
     });
 
-    return circlePlot, xAxis, toolTip, circleLabels;
+    return circlePlot, xAxis, circleLabels, chartGroup;
 
     });
 };
@@ -301,15 +301,15 @@ function chartUpdateyAxis() {
     chartGroup.call(toolTip);
 
     // Create "mouseover" event listener to display tooltip
-    circlePlots.on("mouseover", function(d) {
+    circlePlot.on("mouseover", function(d) {
       toolTip.show(d, this);
     });
     // Create "mouseout" event listener to hide tooltip
-    circlePlots.on("mouseout", function(d) {
+    circlePlot.on("mouseout", function(d) {
       toolTip.hide(d);
     });
     
-    return circlePlot, yAxis, toolTip, circleLabels;
+    return circlePlot, yAxis, circleLabels, chartGroup;
 
   });
 };
