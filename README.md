@@ -1,4 +1,4 @@
-# D3 Challenge - American Health Indicators 
+American Health Indicators 
 
 ![7-animated-scatter](Images/7-animated-scatter.gif)
 
